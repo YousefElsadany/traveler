@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:traveller/layout/layout_screen.dart';
 import 'package:traveller/shared/style/colors.dart';
 
 import '../../../../shared/componants/componants.dart';
@@ -172,7 +173,9 @@ class _CountriesScreenState extends State<CountriesScreen> {
                               buttomColor: primaryColor,
                               buttomWidth: double.infinity,
                               text: 'Sign Up'.tr,
-                              press: () {}),
+                              press: () {
+                                Get.offAll(LayoutScreen());
+                              }),
                         ],
                       ),
                     ),

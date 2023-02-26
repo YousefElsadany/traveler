@@ -30,6 +30,14 @@ Widget customButtom({
       ),
     );
 
+Widget customLine({double margin = 0.0}) => Container(
+      color: Colors.grey[300],
+      width: double.infinity,
+      height: 1,
+      padding: EdgeInsets.all(16.0),
+      margin: EdgeInsets.symmetric(horizontal: margin),
+    );
+
 Widget customTextFeild({
   Color textColor = primaryColor,
   required TextEditingController controller,

@@ -36,6 +36,7 @@ dependencies:
   get: ^4.6.5
   intl: ^0.18.0
   shared_preferences: ^2.0.17
+  youtube_player_flutter: ^8.1.2
 
 dev_dependencies:
   flutter_lints: ^2.0.0

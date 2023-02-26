@@ -29,6 +29,7 @@ class MyApp extends StatelessWidget {
       fallbackLocale: LocalizationService.fallbackLocale,
       translations: LocalizationService(),
       debugShowCheckedModeBanner: false,
+      themeMode: ThemeMode.dark,
       home: const splashScreen(),
     );
   }
@@ -72,7 +73,7 @@ class _splashScreenState extends State<splashScreen> {
                 fit: BoxFit.cover)),
         child: const Center(
           child: Text(
-            'Traveler',
+            'Traveller',
             style: TextStyle(
                 fontWeight: FontWeight.bold, fontSize: 40, color: Colors.white),
           ),

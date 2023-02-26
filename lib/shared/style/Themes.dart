@@ -31,7 +31,7 @@ var darkMode = ThemeData(
       backgroundColor: Color(0xff1e272e),
     ));
 
-var lightMode = ThemeData(
+ThemeData lightMode = ThemeData(
     primarySwatch: primarySwatch,
     scaffoldBackgroundColor: fullBackgroundColor,
     appBarTheme: const AppBarTheme(
