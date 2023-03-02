@@ -30,9 +30,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text(
-          'Edit Profile',
-          style: TextStyle(
+        title: Text(
+          'Edit Profile'.tr,
+          style: const TextStyle(
             color: Colors.white,
           ),
         ),
@@ -49,9 +49,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         actions: [
           TextButton(
               onPressed: () {},
-              child: const Text(
-                'SAVE',
-                style: TextStyle(
+              child: Text(
+                'SAVE'.tr,
+                style: const TextStyle(
                   color: Colors.white,
                 ),
               ))
@@ -104,7 +104,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     buildEditFeild(
-                      text: 'Name',
+                      text: 'Name'.tr,
                       controller: nameController,
                       inputType: TextInputType.name,
                       pIcon: Icons.person_outline,
@@ -113,7 +113,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       height: 15.0,
                     ),
                     buildEditFeild(
-                      text: 'Email',
+                      text: 'Email'.tr,
                       controller: emailController,
                       inputType: TextInputType.emailAddress,
                       pIcon: Icons.email_outlined,

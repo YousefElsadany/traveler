@@ -2,10 +2,11 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:traveller/shared/main_cubit/main_cubit.dart';
 import '../../../shared/componants/componants.dart';
 import '../../../shared/style/colors.dart';
+import '../../widgets/show_localization_dialog.dart';
 import 'EditProfilePage/EditProfile.dart';
 
 class UserProfileScreen extends StatefulWidget {
@@ -19,7 +20,6 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: fullBackgroundColor,
       appBar: AppBar(
         systemOverlayStyle: const SystemUiOverlayStyle(
           statusBarColor: primaryColor,
@@ -27,8 +27,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
         ),
         backgroundColor: primaryColor,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new_outlined,
-              color: Colors.white),
+          icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
           onPressed: () => Navigator.of(context).pop(),
         ),
       ),
@@ -40,7 +39,6 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
               padding: const EdgeInsets.all(20.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
-                //crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const CircleAvatar(
                       radius: 50,
@@ -92,34 +90,43 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
               padding: const EdgeInsets.all(16.0),
               child: Container(
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: MainCubit.get(context).isDarke
+                      ? Colors.white
+                      : itemsColor,
                   borderRadius: BorderRadius.circular(20.0),
                 ),
                 padding: const EdgeInsets.all(12.0),
                 child: Column(
                   children: [
                     buildThings(
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.back();
+                      },
                       icon: Icons.home_outlined,
-                      text: 'My Home',
+                      text: 'Home'.tr,
                     ),
                     customLine(margin: 12.0),
                     buildThings(
-                      onPressed: () {},
-                      icon: Icons.location_on_outlined,
-                      text: 'Adderess',
+                      onPressed: () {
+                        MainCubit.get(context).changeMode();
+                      },
+                      icon: MainCubit.get(context).isDarke
+                          ? Icons.light_mode
+                          : Icons.dark_mode,
+                      text: MainCubit.get(context).isDarke
+                          ? 'Light Mode'.tr
+                          : 'Dark Mode'.tr,
                     ),
                     customLine(margin: 12.0),
                     buildThings(
-                      onPressed: () {},
-                      icon: Icons.format_list_bulleted,
-                      text: 'All My Orders',
-                    ),
-                    customLine(margin: 12.0),
-                    buildThings(
-                      onPressed: () {},
-                      icon: Icons.lock_outlined,
-                      text: 'Change Password',
+                      onPressed: () {
+                        showLocalizationBottomSheet(
+                          context,
+                          isSplash: false,
+                        );
+                      },
+                      icon: Icons.language,
+                      text: 'Language'.tr,
                     ),
                   ],
                 ),
@@ -127,9 +134,10 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
             ),
             TextButton(
               onPressed: () {},
-              child: const Text(
-                'LOGOUT',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              child: Text(
+                'LOGOUT'.tr,
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
               ),
             ),
           ],
@@ -149,17 +157,19 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
           children: [
             Icon(
               icon,
-              color: const Color(0xff727C8E),
+              color: MainCubit.get(context).isDarke
+                  ? const Color(0xff727C8E)
+                  : Colors.white,
             ),
             const SizedBox(
               width: 20.0,
             ),
             Text(
               text,
-              style: const TextStyle(
-                fontSize: 18,
-                color: Color(0xff515C6F),
-              ),
+              style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                  ),
             ),
             const Spacer(),
             IconButton(

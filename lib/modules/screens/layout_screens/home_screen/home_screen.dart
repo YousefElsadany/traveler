@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:traveller/model/places_model.dart';
 import 'package:traveller/modules/screens/UserProfilePage/UserProfile.dart';
 import 'package:traveller/modules/screens/layout_screens/home_screen/most_popular.dart';
+import 'package:traveller/shared/main_cubit/main_cubit.dart';
 import 'package:traveller/shared/style/colors.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
@@ -13,6 +14,7 @@ class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _HomePageState createState() => _HomePageState();
 }
 
@@ -43,38 +45,44 @@ class _HomePageState extends State<HomePage> {
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    Text("Hello!",
-                        style: TextStyle(
+                  children: [
+                    Text(
+                      "Hello!".tr,
+                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
-                            color: Colors.grey)),
-                    SizedBox(
+                          ),
+                    ),
+                    const SizedBox(
                       height: 5,
                     ),
                     Text(
-                      "Find Your Place",
-                      style: TextStyle(
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      "Find Your Place".tr,
+                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
                     ),
                   ],
                 ),
                 InkWell(
                   onTap: () {
-                    Get.to(UserProfileScreen());
+                    Get.to(const UserProfileScreen());
                   },
                   child: Container(
                     height: 40,
                     width: 40,
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
+                    decoration: BoxDecoration(
+                      color: MainCubit.get(context).isDarke
+                          ? Colors.white
+                          : itemsColor,
                       shape: BoxShape.circle,
                     ),
                     child: Icon(
                       Icons.person,
-                      color: Colors.grey.shade500,
+                      color: MainCubit.get(context).isDarke
+                          ? Colors.grey.shade500
+                          : Colors.white,
                     ),
                   ),
                 ),
@@ -97,19 +105,22 @@ class _HomePageState extends State<HomePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Most Popular",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 19.0),
+                  "Most Popular".tr,
+                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
                 ),
                 const SizedBox(
                   height: 20,
                 ),
-                Container(
+                SizedBox(
                   height: 200,
                   width: double.infinity,
                   child: ListView.separated(
                       scrollDirection: Axis.horizontal,
                       itemCount: item.length,
-                      separatorBuilder: (context, index) => SizedBox(
+                      separatorBuilder: (context, index) => const SizedBox(
                             width: 15,
                           ),
                       itemBuilder: (context, index) {
@@ -119,11 +130,11 @@ class _HomePageState extends State<HomePage> {
                           onTap: () {
                             Get.to(
                               DetailsScreen(
-                                hotel: hotelscreen,
+                                item: hotelscreen,
                               ),
                             );
                           },
-                          child: mostPopularItem(hotelscreen),
+                          child: mostPopularItem(context, hotelscreen),
                         );
                       }),
                 ),
@@ -131,11 +142,13 @@ class _HomePageState extends State<HomePage> {
                   height: 20,
                 ),
                 Row(
-                  children: const [
+                  children: [
                     Text(
-                      'Best Visits',
-                      style: TextStyle(
-                          fontSize: 20.0, fontWeight: FontWeight.bold),
+                      'Best Visits'.tr,
+                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
                     )
                   ],
                 ),

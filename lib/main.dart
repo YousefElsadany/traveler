@@ -1,9 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:traveller/modules/screens/Auth/login_screen/login_screen.dart';
 import 'package:traveller/shared/local_storage_service.dart';
+import 'package:traveller/shared/main_cubit/main_cubit.dart';
 import 'package:traveller/shared/style/Themes.dart';
 
 import 'modules/widgets/show_localization_dialog.dart';
@@ -13,24 +15,40 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await LocalStorageService.init();
+  late bool? isDark = LocalStorageService.getData(key: 'isDark');
   Future.delayed(Duration(seconds: 2));
-  runApp(const MyApp());
+  runApp(MyApp(isDark: (isDark != null) ? isDark : false));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final bool isDark;
+  const MyApp({super.key, required this.isDark});
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      title: 'Traveller',
-      theme: lightMode,
-      locale: LocalizationService().getCurrentLocate(),
-      fallbackLocale: LocalizationService.fallbackLocale,
-      translations: LocalizationService(),
-      debugShowCheckedModeBanner: false,
-      themeMode: ThemeMode.dark,
-      home: const splashScreen(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => MainCubit()..changeMode(fromShared: isDark),
+        ),
+      ],
+      child: BlocBuilder<MainCubit, MainState>(
+        builder: (context, state) {
+          return GetMaterialApp(
+            title: 'Traveller',
+            theme: lightMode,
+            darkTheme: darkMode,
+            locale: LocalizationService().getCurrentLocate(),
+            fallbackLocale: LocalizationService.fallbackLocale,
+            translations: LocalizationService(),
+            debugShowCheckedModeBanner: false,
+            themeMode: !MainCubit.get(context).isDarke
+                ? ThemeMode.dark
+                : ThemeMode.light,
+            home: const splashScreen(),
+          );
+        },
+      ),
     );
   }
 }

@@ -29,9 +29,6 @@ class _LayoutScreenState extends State<LayoutScreen> {
       child: Text('Favorite'),
     ),
     const EventsScreen(),
-    const Center(
-      child: Text('Settings'),
-    ),
   ];
   @override
   Widget build(BuildContext context) {
@@ -43,9 +40,8 @@ class _LayoutScreenState extends State<LayoutScreen> {
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: _currentIndex,
-        backgroundColor: Colors.white,
         iconSize: 30,
-        unselectedItemColor: Colors.grey.shade500,
+        // unselectedItemColor: Colors.grey.shade500,
         selectedItemColor: primaryColor,
         onTap: (index) {
           changeIndex(index);
@@ -66,11 +62,6 @@ class _LayoutScreenState extends State<LayoutScreen> {
                 Icons.event,
               ),
               label: 'Events'.tr),
-          BottomNavigationBarItem(
-              icon: const Icon(
-                Icons.settings,
-              ),
-              label: 'Settings'.tr),
         ],
       ),
     );

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../model/places_model.dart';
+import '../../../../shared/main_cubit/main_cubit.dart';
 import '../../../../shared/style/colors.dart';
 import 'item_details_screen.dart';
 
@@ -28,18 +29,20 @@ class BestVisits extends StatelessWidget {
               onTap: () {
                 Get.to(
                   DetailsScreen(
-                    hotel: hotelscreen,
+                    item: hotelscreen,
                   ),
                 );
               },
               child: Container(
                 height: 110,
                 width: double.infinity,
-                padding: EdgeInsetsDirectional.only(end: 16),
+                padding: const EdgeInsetsDirectional.only(end: 16),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: Colors.white,
-                    boxShadow: [
+                    color: MainCubit.get(context).isDarke
+                        ? Colors.white
+                        : itemsColor,
+                    boxShadow: const [
                       BoxShadow(
                           color: Colors.black12,
                           offset: Offset(0.0, 4.0),
@@ -53,9 +56,9 @@ class BestVisits extends StatelessWidget {
                           height: 110,
                           width: 120,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(10),
-                                bottomLeft: Radius.circular(10)),
+                            borderRadius: const BorderRadiusDirectional.only(
+                                topStart: Radius.circular(10),
+                                bottomStart: Radius.circular(10)),
                             image: DecorationImage(
                                 image: AssetImage(hotel[index].imgurl),
                                 fit: BoxFit.cover),
@@ -74,7 +77,7 @@ class BestVisits extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 15,
                     ),
                     Column(
@@ -83,22 +86,28 @@ class BestVisits extends StatelessWidget {
                       children: [
                         Text(
                           hotel[index].title,
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.w500),
+                          style:
+                              Theme.of(context).textTheme.bodyText1!.copyWith(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w500,
+                                  ),
                         ),
                         Text(
                           hotel[index].location,
-                          style: TextStyle(
-                              fontSize: 15, fontWeight: FontWeight.w400),
+                          style:
+                              Theme.of(context).textTheme.bodyText1!.copyWith(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w400,
+                                  ),
                         ),
                       ],
                     ),
-                    Spacer(),
+                    const Spacer(),
                     Row(
                       children: [
                         Text(
                           hotel[index].rating.toString(),
-                          style: TextStyle(color: primaryColor),
+                          style: const TextStyle(color: primaryColor),
                         ),
                         const Icon(
                           Icons.star,

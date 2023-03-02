@@ -44,3 +44,5 @@ class SmartColor {
 const Color primaryColor = Color(0xffad8b72);
 final MaterialColor primarySwatch = SmartColor.primarySwatch(primaryColor);
 const fullBackgroundColor = Color(0xfff0f0f0);
+const darkBackgroundColor = Color(0xfff0f0f0);
+const itemsColor = Color.fromARGB(255, 50, 55, 59);

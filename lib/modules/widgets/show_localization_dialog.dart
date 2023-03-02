@@ -28,12 +28,14 @@ class ShowLocalizationBottomSheet extends StatelessWidget {
                   child: CircularProgressIndicator(),
                 )
               : Container(
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(20.0),
                       topRight: Radius.circular(20.0),
                     ),
-                    color: Colors.white,
+                    color: MainCubit.get(context).isDarke
+                        ? Colors.white
+                        : itemsColor,
                   ),
                   child: Padding(
                     padding: EdgeInsets.all(12),

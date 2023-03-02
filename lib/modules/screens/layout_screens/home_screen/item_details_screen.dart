@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:traveller/model/places_model.dart';
 
 class DetailsScreen extends StatefulWidget {
-  final PlacesModel hotel;
+  final PlacesModel item;
 
-  DetailsScreen({required this.hotel});
+  DetailsScreen({required this.item});
 
   @override
   _DetailsScreenState createState() => _DetailsScreenState();
@@ -27,7 +28,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       blurRadius: 6.0)
                 ]),
                 child: Image(
-                  image: AssetImage(widget.hotel.imgurl),
+                  image: AssetImage(widget.item.imgurl),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -46,8 +47,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                           Navigator.pop(context);
                         },
                         icon: const Icon(
-                          Icons.arrow_back_ios,
+                          Icons.arrow_back_ios_new,
                           size: 15,
+                          color: Colors.black,
                         ),
                       ),
                     ),
@@ -63,27 +65,29 @@ class _DetailsScreenState extends State<DetailsScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  widget.hotel.title,
-                  style: const TextStyle(
-                      fontSize: 25.0, fontWeight: FontWeight.w400),
+                  widget.item.title,
+                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                        fontSize: 25,
+                        fontWeight: FontWeight.w400,
+                      ),
                 ),
                 Text(
-                  widget.hotel.location,
+                  widget.item.location,
                   style: const TextStyle(fontSize: 16, color: Colors.grey),
                 ),
                 const SizedBox(
                   height: 20,
                 ),
-                Text(widget.hotel.description),
+                Text(widget.item.description),
                 const SizedBox(
                   height: 20,
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      'Reviews',
-                      style: TextStyle(
+                    Text(
+                      'Reviews'.tr,
+                      style: const TextStyle(
                           color: Colors.grey, fontWeight: FontWeight.w500),
                     ),
                     const SizedBox(
@@ -91,7 +95,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     ),
                     Row(
                       children: [
-                        Text(widget.hotel.rating.toString()),
+                        Text(widget.item.rating.toString()),
                         const Icon(Icons.star, size: 12, color: Colors.amber),
                         const Icon(Icons.star, size: 12, color: Colors.amber),
                         const Icon(Icons.star, size: 12, color: Colors.amber),

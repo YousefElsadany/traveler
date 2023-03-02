@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 
+import '../../../../shared/main_cubit/main_cubit.dart';
 import '../../../../shared/style/colors.dart';
 
-Widget mostPopularItem(item) {
+Widget mostPopularItem(context, item) {
   return Container(
     height: 200,
     width: 180,
     decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        color: Colors.white,
+        color: MainCubit.get(context).isDarke ? Colors.white : itemsColor,
         boxShadow: const [
           BoxShadow(
               color: Colors.black12, offset: Offset(0.0, 4.0), blurRadius: 10.0)
@@ -42,21 +43,27 @@ Widget mostPopularItem(item) {
           ],
         ),
         Padding(
-          padding: const EdgeInsets.only(left: 10, top: 5),
+          padding: const EdgeInsetsDirectional.only(start: 10, top: 5),
           child: Text(
             item.title,
-            style: const TextStyle(fontSize: 12),
+            style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w700,
+                ),
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(left: 10),
+          padding: const EdgeInsetsDirectional.only(start: 10),
           child: Text(
             item.location,
-            style: const TextStyle(fontSize: 12),
+            style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                ),
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(left: 7, top: 5, right: 3),
+          padding: const EdgeInsetsDirectional.only(start: 7, top: 5, end: 3),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

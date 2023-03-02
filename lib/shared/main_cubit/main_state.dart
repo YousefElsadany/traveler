@@ -8,3 +8,5 @@ class MainInitial extends MainState {}
 class LoadingChooseLangState extends MainState {}
 
 class SuccessChooseLangState extends MainState {}
+
+class AppChangeMode extends MainState {}

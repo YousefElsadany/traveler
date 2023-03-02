@@ -1,5 +1,5 @@
 const Map<String, String> enUS = {
-  'chose_lang': 'choose Lang',
+  'chose_lang': 'Choose Lang',
   "Login": "Login",
   'Sign Out': 'Sign Out',
   "register": "register",
@@ -72,5 +72,17 @@ const Map<String, String> enUS = {
   'Educational tourism': 'Educational tourism',
 
   'Governorates': 'Governorates',
-  'Tourism Type': 'Tourism Type'
+  'Tourism Type': 'Tourism Type',
+  'Home': 'Home',
+  'Favorite': 'Favorite',
+  'Events': 'Events',
+  "Hello!": "Hello!",
+  "Find Your Place": "Find Your Place",
+  "Most Popular": "Most Popular",
+  'Best Visits': 'Best Visits',
+  'Reviews': 'Reviews',
+  'Dark Mode': 'Dark Mode',
+  'Light Mode': 'Light Mode',
+  'LOGOUT': 'LOGOUT',
+  'Edit Profile': 'Edit Profile',
 };

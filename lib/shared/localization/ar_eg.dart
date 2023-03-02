@@ -76,5 +76,17 @@ const Map<String, String> arEG = {
   'Educational tourism': 'سياحة تعليمية',
 
   'Governorates': 'المحافظات',
-  'Tourism Type': 'نوع السياحة'
+  'Tourism Type': 'نوع السياحة',
+  'Home': 'الصفحة الرئيسية',
+  'Favorite': 'مفضل',
+  'Events': "أحداث",
+  "Hello!": "مرحبًا!",
+  "Find Your Place": "اعثر على مكانك",
+  "Most Popular": "الأكثر شهرة",
+  'Best Visits': "أفضل الزيارات",
+  'Reviews': "التعليقات",
+  'Dark Mode': "الوضع الليلي",
+  'Light Mode': "الوضع النهاري",
+  'LOGOUT': 'تسجيل خروج',
+  'Edit Profile': 'تعديل الملف الشخصي',
 };

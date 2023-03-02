@@ -27,8 +27,8 @@ var darkMode = ThemeData(
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       type: BottomNavigationBarType.fixed,
       selectedItemColor: primaryColor,
-      unselectedItemColor: Colors.grey,
-      backgroundColor: Color(0xff1e272e),
+      unselectedItemColor: Colors.white,
+      backgroundColor: itemsColor,
     ));
 
 ThemeData lightMode = ThemeData(

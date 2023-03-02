@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 import '../../../../model/places_model.dart';
 
@@ -19,10 +20,11 @@ class _EventsScreenState extends State<EventsScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              "Events",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
-            ),
+            Text("Events".tr,
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText1!
+                    .copyWith(fontSize: 25.0)),
             const SizedBox(
               height: 20,
             ),
