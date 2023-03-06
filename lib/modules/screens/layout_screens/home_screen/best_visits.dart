@@ -9,7 +9,7 @@ import '../../../../shared/style/colors.dart';
 import 'item_details_screen.dart';
 
 class BestVisits extends StatelessWidget {
-  final hotel = PlacesModel.bestVisitList();
+  final items = PlacesModel.bestVisitList();
 
   BestVisits({super.key});
 
@@ -22,14 +22,13 @@ class BestVisits extends StatelessWidget {
           separatorBuilder: (_, index) => const SizedBox(
                 height: 10,
               ),
-          itemCount: hotel.length,
+          itemCount: items.length,
           itemBuilder: (context, index) {
-            PlacesModel hotelscreen = hotel[index];
             return GestureDetector(
               onTap: () {
                 Get.to(
                   DetailsScreen(
-                    item: hotelscreen,
+                    item: items[index],
                   ),
                 );
               },
@@ -60,7 +59,7 @@ class BestVisits extends StatelessWidget {
                                 topStart: Radius.circular(10),
                                 bottomStart: Radius.circular(10)),
                             image: DecorationImage(
-                                image: AssetImage(hotel[index].imgurl),
+                                image: AssetImage(items[index].imgurl),
                                 fit: BoxFit.cover),
                           ),
                         ),
@@ -85,7 +84,7 @@ class BestVisits extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          hotel[index].title,
+                          items[index].title,
                           style:
                               Theme.of(context).textTheme.bodyText1!.copyWith(
                                     fontSize: 18,
@@ -93,7 +92,7 @@ class BestVisits extends StatelessWidget {
                                   ),
                         ),
                         Text(
-                          hotel[index].location,
+                          items[index].location,
                           style:
                               Theme.of(context).textTheme.bodyText1!.copyWith(
                                     fontSize: 15,
@@ -106,7 +105,7 @@ class BestVisits extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          hotel[index].rating.toString(),
+                          items[index].rating.toString(),
                           style: const TextStyle(color: primaryColor),
                         ),
                         const Icon(

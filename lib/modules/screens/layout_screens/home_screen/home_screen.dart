@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:traveller/model/places_model.dart';
-import 'package:traveller/modules/screens/UserProfilePage/UserProfile.dart';
+import 'package:traveller/modules/screens/user_profile_screen/user_profile_screen.dart';
 import 'package:traveller/modules/screens/layout_screens/home_screen/most_popular.dart';
 import 'package:traveller/shared/main_cubit/main_cubit.dart';
 import 'package:traveller/shared/style/colors.dart';
@@ -124,17 +124,15 @@ class _HomePageState extends State<HomePage> {
                             width: 15,
                           ),
                       itemBuilder: (context, index) {
-                        PlacesModel hotelscreen = item[index];
-
                         return InkWell(
                           onTap: () {
                             Get.to(
                               DetailsScreen(
-                                item: hotelscreen,
+                                item: item[index],
                               ),
                             );
                           },
-                          child: mostPopularItem(context, hotelscreen),
+                          child: mostPopularItem(context, item[index]),
                         );
                       }),
                 ),

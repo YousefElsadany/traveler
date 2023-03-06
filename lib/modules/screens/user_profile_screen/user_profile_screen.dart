@@ -7,7 +7,7 @@ import 'package:traveller/shared/main_cubit/main_cubit.dart';
 import '../../../shared/componants/componants.dart';
 import '../../../shared/style/colors.dart';
 import '../../widgets/show_localization_dialog.dart';
-import 'EditProfilePage/EditProfile.dart';
+import 'edit_profile_screen/edit_profile_screen.dart';
 
 class UserProfileScreen extends StatefulWidget {
   const UserProfileScreen({Key? key}) : super(key: key);
