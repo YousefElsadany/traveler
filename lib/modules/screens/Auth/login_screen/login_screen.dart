@@ -48,8 +48,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   key: 'login', value: state.model.token);
               LocalStorageService.saveData(
                   key: 'userId', value: state.model.data!.sId);
+              LocalStorageService.putBool(key: 'isloged', value: true);
+
               Get.snackbar('Login', state.model.message!,
                   backgroundColor: Colors.white, colorText: Colors.black);
+            }
+            if (state is SigninError) {
+              Get.snackbar('Wrong'.tr, 'Something went wrong'.tr);
             }
           },
           builder: (context, state) {
@@ -93,6 +98,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               text: 'Login as a guest'.tr,
                               press: () {
                                 Get.offAll(LayoutScreen());
+                                LocalStorageService.putBool(
+                                    key: 'isloged', value: false);
                               }),
                         ],
                       ),

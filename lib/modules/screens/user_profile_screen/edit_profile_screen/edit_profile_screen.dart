@@ -12,6 +12,7 @@ import 'package:traveller/shared/style/colors.dart';
 
 import '../../../../shared/componants/componants.dart';
 import '../../../../shared/local_storage_service.dart';
+import '../../../../shared/main_cubit/main_cubit.dart';
 
 class EditProfileScreen extends StatefulWidget {
   final UserModel model;
@@ -29,10 +30,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   late String genderValue;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
+    var dateTime = DateTime.parse(widget.model.date!);
+    var day = dateTime.day < 10 ? "0${dateTime.day}" : "${dateTime.day}";
+    var month =
+        dateTime.month < 10 ? "0${dateTime.month}" : "${dateTime.month}";
     nameController = TextEditingController(text: widget.model.name);
-    birthdateController = TextEditingController(text: widget.model.date);
+    birthdateController =
+        TextEditingController(text: '${dateTime.year}-$month-$day');
     emailController = TextEditingController(text: widget.model.email);
     genderValue = widget.model.gender!;
   }
@@ -41,7 +46,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   Widget build(BuildContext context) {
     print(LocalStorageService.getData(key: 'login').toString());
     return BlocConsumer<UserCubit, UserState>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if (state is UserEditError) {
+          Get.snackbar('Wrong'.tr, 'Something went wrong'.tr);
+        }
+      },
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
@@ -89,7 +98,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           key: "gender",
                           value: genderValue);
                     }
-                    Get.offAll(LayoutScreen());
+                    Get.back();
                     Get.snackbar('Edit', 'Edit Successful',
                         backgroundColor: Colors.white, colorText: Colors.black);
                   },
@@ -142,12 +151,15 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     padding: const EdgeInsets.all(12.0),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      color: Colors.white,
+                      color: MainCubit.get(context).isDarke
+                          ? Colors.white
+                          : itemsColor,
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         buildEditFeild(
+                          context,
                           text: 'Name'.tr,
                           controller: nameController,
                           inputType: TextInputType.name,
@@ -157,6 +169,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           height: 15.0,
                         ),
                         buildEditFeild(
+                          context,
                           text: 'Email'.tr,
                           controller: emailController,
                           inputType: TextInputType.emailAddress,
@@ -167,9 +180,15 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         ),
                         TextField(
                           controller: birthdateController,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyText1!
+                              .copyWith(fontSize: 14),
                           decoration: InputDecoration(
-                              icon: const Icon(Icons.calendar_today),
-                              labelText: 'Birthdate'.tr),
+                            icon: const Icon(Icons.calendar_today),
+                            labelText: 'Birthdate'.tr,
+                            labelStyle: TextStyle(color: Colors.grey[500]),
+                          ),
                           readOnly: true,
                           onTap: () async {
                             DateTime? pickedDate = await showDatePicker(
@@ -194,9 +213,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         ),
                         Text(
                           'Gender'.tr,
-                          style: const TextStyle(
-                            fontSize: 14.0,
-                            // color: Color(0xff929292),
+                          style: TextStyle(
+                            color: Colors.grey[600],
                           ),
                         ),
                         const SizedBox(
@@ -205,6 +223,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         DropdownButton(
                           value: genderValue,
                           isExpanded: true,
+                          dropdownColor: !MainCubit.get(context).isDarke
+                              ? Colors.black
+                              : Colors.white,
                           underline: const Divider(
                             color: Colors.black,
                           ),
@@ -231,7 +252,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   }
 }
 
-Widget buildEditFeild({
+Widget buildEditFeild(
+  context, {
   required String text,
   required TextEditingController controller,
   required TextInputType inputType,
@@ -250,6 +272,7 @@ Widget buildEditFeild({
           height: 10.0,
         ),
         customTextFeild(
+          context,
           controller: controller,
           inputType: inputType,
           title: '',

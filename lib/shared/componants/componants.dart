@@ -38,7 +38,8 @@ Widget customLine({double margin = 0.0}) => Container(
       margin: EdgeInsets.symmetric(horizontal: margin),
     );
 
-Widget customTextFeild({
+Widget customTextFeild(
+  context, {
   Color textColor = primaryColor,
   required TextEditingController controller,
   required TextInputType inputType,
@@ -58,9 +59,12 @@ Widget customTextFeild({
       obscureText: isPassword,
       validator: validate,
       onChanged: change,
+      style: Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 14),
       onFieldSubmitted: Submit,
       onTap: tap,
       decoration: InputDecoration(
+        hintStyle:
+            Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 14),
         contentPadding:
             const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
         focusedBorder: UnderlineInputBorder(
@@ -90,7 +94,7 @@ DropdownMenuItem<String> buildMenuItem(context, String item) {
   return DropdownMenuItem(
     value: item,
     alignment: AlignmentDirectional.center,
-    child: Text(item, style: Theme.of(context).textTheme.subtitle2),
+    child: Text(item, style: Theme.of(context).textTheme.bodyText1),
   );
 }
 

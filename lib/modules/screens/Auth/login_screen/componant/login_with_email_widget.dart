@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:traveller/modules/screens/otp_screen/email_screen.dart';
 
 import '../../../../../shared/componants/componants.dart';
+import '../../../../../shared/main_cubit/main_cubit.dart';
 import '../../../../../shared/style/colors.dart';
 import '../../RegisterPage/register_screen.dart';
 import '../cubit/signin_cubit.dart';
@@ -22,7 +24,9 @@ class LoginWithEmailWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15), color: Colors.white),
+        borderRadius: BorderRadius.circular(15),
+        color: MainCubit.get(context).isDarke ? Colors.white : itemsColor,
+      ),
       child: Padding(
         padding: EdgeInsets.all(16.0),
         child: Column(
@@ -35,10 +39,9 @@ class LoginWithEmailWidget extends StatelessWidget {
                   children: [
                     Text(
                       'Welcome,'.tr,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 30.0,
-                      ),
+                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                            fontSize: 30.0,
+                          ),
                     ),
                     TextButton(
                       onPressed: () {
@@ -78,6 +81,7 @@ class LoginWithEmailWidget extends StatelessWidget {
                   ),
                 ),
                 customTextFeild(
+                  context,
                   controller: emailController,
                   inputType: TextInputType.emailAddress,
                   title: 'example@gmail.com',
@@ -99,6 +103,7 @@ class LoginWithEmailWidget extends StatelessWidget {
                   ),
                 ),
                 customTextFeild(
+                  context,
                   controller: passwordController,
                   inputType: TextInputType.visiblePassword,
                   title: '●●●●●●●●●●●●',
@@ -117,14 +122,15 @@ class LoginWithEmailWidget extends StatelessWidget {
             Container(
               alignment: Alignment.centerRight,
               child: TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Get.to(EmailScreen());
+                },
                 child: Text(
                   'Forget Password?'.tr,
                   textAlign: TextAlign.end,
-                  style: TextStyle(
-                    color: Color.fromARGB(190, 0, 0, 0),
-                    fontSize: 14.0,
-                  ),
+                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                        fontSize: 14.0,
+                      ),
                 ),
               ),
             ),

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:traveller/layout/layout_screen.dart';
+import 'package:traveller/modules/screens/Auth/login_screen/login_screen.dart';
 import 'package:traveller/shared/style/colors.dart';
 
 import '../../../../shared/componants/componants.dart';
@@ -178,7 +179,7 @@ class _CountriesScreenState extends State<CountriesScreen> {
                               press: () {
                                 LocalStorageService.saveData(
                                     key: 'login', value: widget.userId);
-                                Get.offAll(LayoutScreen());
+                                Get.offAll(LoginScreen());
                               }),
                         ],
                       ),

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:traveller/shared/style/colors.dart';
 
 import '../../../shared/main_cubit/main_cubit.dart';
+import '../user_profile_screen/user_cubit/user_cubit.dart';
 import 'componant/reset_change_password_widget.dart';
 
 class CHangePasswordScreen extends StatefulWidget {
@@ -13,6 +16,10 @@ class CHangePasswordScreen extends StatefulWidget {
 }
 
 class _CHangePasswordScreenState extends State<CHangePasswordScreen> {
+  var formKey = GlobalKey<FormState>();
+  var oldPasswordController = TextEditingController();
+  var newPasswordController = TextEditingController();
+  var reNewPasswordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,10 +36,31 @@ class _CHangePasswordScreenState extends State<CHangePasswordScreen> {
                 MainCubit.get(context).isDarke ? Colors.black : Colors.white),
         elevation: 0.0,
       ),
-      body: ResetAndChangePassword(
-        isChangePassword: true,
-        submitPressed: () {},
-        title: 'Change Password',
+      body: BlocListener<UserCubit, UserState>(
+        listener: (context, state) {
+          if (state is UserChangePasswordSuccess) {
+            Get.back();
+            Get.snackbar('Change Password', 'Change Password Successful');
+          }
+          if (state is UserChangePasswordError) {
+            Get.snackbar('Wrong', 'Something went wrong');
+          }
+        },
+        child: ResetAndChangePassword(
+          formKey: formKey,
+          newPasswordController: newPasswordController,
+          oldPasswordController: oldPasswordController,
+          reNewPasswordController: reNewPasswordController,
+          isChangePassword: true,
+          submitPressed: () {
+            if (formKey.currentState!.validate()) {
+              BlocProvider.of<UserCubit>(context).changePassword(
+                  currentPassword: oldPasswordController.text,
+                  newPassword: newPasswordController.text);
+            } else {}
+          },
+          title: 'Change Password',
+        ),
       ),
     );
   }

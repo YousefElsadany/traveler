@@ -18,3 +18,31 @@ class SigninError extends SigninState {
 
   SigninError(this.error);
 }
+
+class SendResetPassLoading extends SigninState {}
+
+class SendResetPassLoaded extends SigninState {
+  final String message;
+
+  SendResetPassLoaded(this.message);
+}
+
+class SendResetPassError extends SigninState {
+  final String error;
+
+  SendResetPassError(this.error);
+}
+
+class SendResetPassRequestLoading extends SigninState {}
+
+class SendResetPassRequestLoaded extends SigninState {
+  final String message;
+
+  SendResetPassRequestLoaded(this.message);
+}
+
+class SendResetPassRequestError extends SigninState {
+  final String error;
+
+  SendResetPassRequestError(this.error);
+}

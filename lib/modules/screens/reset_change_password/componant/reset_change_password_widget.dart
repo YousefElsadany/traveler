@@ -9,11 +9,19 @@ class ResetAndChangePassword extends StatefulWidget {
   final bool isChangePassword;
   final submitPressed;
   final String title;
-  const ResetAndChangePassword({
+  final formKey;
+  var oldPasswordController;
+  var newPasswordController;
+  var reNewPasswordController;
+  ResetAndChangePassword({
     Key? key,
     required this.isChangePassword,
     required this.title,
     required this.submitPressed,
+    required this.formKey,
+    this.oldPasswordController,
+    required this.newPasswordController,
+    required this.reNewPasswordController,
   }) : super(key: key);
 
   @override
@@ -32,10 +40,7 @@ class _ResetAndChangePasswordState extends State<ResetAndChangePassword> {
   }
 
   IconData _suffinx = Icons.visibility_off_outlined;
-  var formKey = GlobalKey<FormState>();
-  var oldPasswordController = TextEditingController();
-  var newPasswordController = TextEditingController();
-  var reNewPasswordController = TextEditingController();
+
   _snackBar(text) => SnackBar(
         content: Text(text),
         duration: const Duration(seconds: 3),
@@ -47,7 +52,7 @@ class _ResetAndChangePasswordState extends State<ResetAndChangePassword> {
       padding: const EdgeInsets.all(20),
       child: SingleChildScrollView(
         child: Form(
-          key: formKey,
+          key: widget.formKey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -75,7 +80,8 @@ class _ResetAndChangePasswordState extends State<ResetAndChangePassword> {
                           height: 10.0,
                         ),
                         customTextFeild(
-                          controller: oldPasswordController,
+                          context,
+                          controller: widget.oldPasswordController,
                           inputType: TextInputType.visiblePassword,
                           title: 'Old Password'.tr,
                           pIcon: Icons.lock,
@@ -86,7 +92,10 @@ class _ResetAndChangePasswordState extends State<ResetAndChangePassword> {
                           },
                           validate: (value) {
                             if (value!.isEmpty) {
-                            } else if (value.length < 6) {}
+                              return 'Old password is requird';
+                            } else if (value.length < 6) {
+                              return 'Old password less than 6 chars';
+                            }
                             return null;
                           },
                         ),
@@ -106,7 +115,8 @@ class _ResetAndChangePasswordState extends State<ResetAndChangePassword> {
                 height: 10.0,
               ),
               customTextFeild(
-                controller: newPasswordController,
+                context,
+                controller: widget.newPasswordController,
                 inputType: TextInputType.visiblePassword,
                 title: 'New Password'.tr,
                 pIcon: Icons.lock,
@@ -117,7 +127,10 @@ class _ResetAndChangePasswordState extends State<ResetAndChangePassword> {
                 },
                 validate: (value) {
                   if (value!.isEmpty) {
-                  } else if (value.length < 6) {}
+                    return 'New password is requird';
+                  } else if (value.length < 6) {
+                    return 'New password less than 6 chars';
+                  }
                   return null;
                 },
               ),
@@ -135,7 +148,8 @@ class _ResetAndChangePasswordState extends State<ResetAndChangePassword> {
                 height: 10.0,
               ),
               customTextFeild(
-                controller: reNewPasswordController,
+                context,
+                controller: widget.reNewPasswordController,
                 inputType: TextInputType.visiblePassword,
                 title: 'Re-New Password'.tr,
                 pIcon: Icons.lock,
@@ -146,7 +160,10 @@ class _ResetAndChangePasswordState extends State<ResetAndChangePassword> {
                 },
                 validate: (value) {
                   if (value!.isEmpty) {
-                  } else if (value.length < 6) {}
+                    return 'Re-new password is requird';
+                  } else if (value != widget.newPasswordController.text) {
+                    return 'Passwords is not match';
+                  }
                   return null;
                 },
               ),
@@ -160,16 +177,7 @@ class _ResetAndChangePasswordState extends State<ResetAndChangePassword> {
                     buttomColor: primaryColor,
                     buttomWidth: double.infinity,
                     text: 'Submit'.tr,
-                    press:
-                        //  () {
-                        //   if (formKey.currentState!.validate()) {
-                        //     ScaffoldMessenger.of(context).showSnackBar(
-                        //         SnackBar(content: Text('Processing Data')));
-                        //   } else {
-                        //     Vibration.vibrate(duration: 300);
-                        //   }
-                        // },
-                        widget.submitPressed,
+                    press: widget.submitPressed,
                   ),
                 ],
               ),

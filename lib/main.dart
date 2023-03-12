@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:traveller/layout/layout_screen.dart';
+import 'package:traveller/modules/screens/Auth/RegisterPage/cubit/signup_cubit.dart';
+import 'package:traveller/modules/screens/Auth/login_screen/cubit/signin_cubit.dart';
 import 'package:traveller/modules/screens/Auth/login_screen/login_screen.dart';
 import 'package:traveller/modules/screens/user_profile_screen/user_cubit/user_cubit.dart';
 import 'package:traveller/shared/DioHelper.dart';
@@ -42,6 +44,12 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => UserCubit(),
+        ),
+        BlocProvider(
+          create: (context) => SigninCubit(),
+        ),
+        BlocProvider(
+          create: (context) => SignupCubit(),
         ),
       ],
       child: BlocBuilder<MainCubit, MainState>(

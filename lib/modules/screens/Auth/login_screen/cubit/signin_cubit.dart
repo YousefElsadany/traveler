@@ -26,4 +26,35 @@ class SigninCubit extends Cubit<SigninState> {
       print(error.toString());
     });
   }
+
+  Future<void> sentResetPasswordRequest({required String email}) async {
+    emit(SendResetPassLoading());
+
+    await DioHelper.postData(url: 'auth/password-reset-request', data: {
+      "email": email,
+    }).then((value) {
+      emit(SendResetPassLoaded(value.data['message'].toString()));
+      print(value.data['message'].toString());
+    }).catchError((error) {
+      emit(SendResetPassError(error.toString()));
+      print(error.toString());
+    });
+  }
+
+  Future<void> sentResetPassword(
+      {required String email, required otp, required String password}) async {
+    emit(SendResetPassRequestLoading());
+
+    await DioHelper.postData(url: 'auth/password-reset', data: {
+      "email": email,
+      "otp": int.parse(otp),
+      "newPassword": password,
+    }).then((value) {
+      emit(SendResetPassRequestLoaded(value.data['message'].toString()));
+      print(value.data['message'].toString());
+    }).catchError((error) {
+      emit(SendResetPassRequestError(error.toString()));
+      print(error.toString());
+    });
+  }
 }

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:traveller/modules/screens/reset_change_password/reset_password.dart';
 import 'package:traveller/shared/componants/componants.dart';
 
 import '../../../shared/main_cubit/main_cubit.dart';
@@ -11,9 +13,11 @@ class OtpScreen extends StatelessWidget {
   OtpScreen({
     Key? key,
     required this.email,
+    required this.message,
   }) : super(key: key);
 
   final email;
+  final String message;
   late String otpCode;
 
   @override
@@ -42,11 +46,11 @@ class OtpScreen extends StatelessWidget {
                 const SizedBox(height: 30),
                 RichText(
                   text: TextSpan(
-                    text: 'Enter The 6-digit code sent to you at '.tr,
+                    text: message,
                     style: Theme.of(context).textTheme.bodyText1!,
                     children: <TextSpan>[
                       TextSpan(
-                        text: '$email',
+                        text: ' $email',
                         style: Theme.of(context).textTheme.bodyText1!,
                       ),
                     ],
@@ -59,7 +63,12 @@ class OtpScreen extends StatelessWidget {
                   buttomWidth: double.infinity,
                   buttomColor: primaryColor,
                   text: 'Verify'.tr,
-                  press: () {},
+                  press: () {
+                    Get.to(ResetPasswordScreen(
+                      otp: otpCode,
+                      email: email,
+                    ));
+                  },
                 ),
               ],
             ),

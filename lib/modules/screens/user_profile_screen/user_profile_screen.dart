@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:traveller/modules/screens/Auth/login_screen/login_screen.dart';
+import 'package:traveller/modules/screens/reset_change_password/change_password%20.dart';
 import 'package:traveller/shared/local_storage_service.dart';
 import 'package:traveller/shared/main_cubit/main_cubit.dart';
 import '../../../shared/componants/componants.dart';
@@ -48,10 +49,16 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
             Get.snackbar('Logout', 'Logout Successful',
                 backgroundColor: Colors.white, colorText: Colors.black);
             LocalStorageService.removeData(key: 'login');
+            LocalStorageService.removeData(key: 'userId');
             Get.offAll(LoginScreen());
           }
         },
         builder: (context, state) {
+          if (state is UserGetDataLoading) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
           if (state is UserGetDataSuccess) {
             return SingleChildScrollView(
               child: Column(
@@ -151,6 +158,14 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                             },
                             icon: Icons.language,
                             text: 'Language'.tr,
+                          ),
+                          customLine(margin: 12.0),
+                          buildThings(
+                            onPressed: () {
+                              Get.to(CHangePasswordScreen());
+                            },
+                            icon: Icons.lock,
+                            text: 'Change Password'.tr,
                           ),
                         ],
                       ),

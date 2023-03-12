@@ -58,6 +58,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
               Get.snackbar('Signup', state.model.message!,
                   backgroundColor: Colors.white, colorText: Colors.black);
             }
+            if (state is SignupError) {
+              Get.snackbar('Wrong'.tr, 'Something went wrong'.tr);
+            }
           },
           builder: (context, state) {
             return Container(
@@ -113,6 +116,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         ),
                                       ),
                                       customTextFeild(
+                                        context,
                                         controller: nameController,
                                         inputType: TextInputType.name,
                                         title: 'Mohamed',
@@ -134,6 +138,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         ),
                                       ),
                                       customTextFeild(
+                                        context,
                                         controller: emailController,
                                         inputType: TextInputType.emailAddress,
                                         title: 'example@gmail.com',
@@ -211,6 +216,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         ),
                                       ),
                                       customTextFeild(
+                                        context,
                                         controller: passwordController,
                                         inputType:
                                             TextInputType.visiblePassword,
