@@ -2,12 +2,16 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:traveller/modules/screens/Auth/login_screen/login_screen.dart';
+import 'package:traveller/shared/local_storage_service.dart';
 import 'package:traveller/shared/main_cubit/main_cubit.dart';
 import '../../../shared/componants/componants.dart';
 import '../../../shared/style/colors.dart';
 import '../../widgets/show_localization_dialog.dart';
 import 'edit_profile_screen/edit_profile_screen.dart';
+import 'user_cubit/user_cubit.dart';
 
 class UserProfileScreen extends StatefulWidget {
   const UserProfileScreen({Key? key}) : super(key: key);
@@ -17,6 +21,13 @@ class UserProfileScreen extends StatefulWidget {
 }
 
 class _UserProfileScreenState extends State<UserProfileScreen> {
+  @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<UserCubit>(context)
+        .getData(LocalStorageService.getData(key: 'userId'));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,117 +42,136 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
           onPressed: () => Navigator.of(context).pop(),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              color: primaryColor,
-              padding: const EdgeInsets.all(20.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
+      body: BlocConsumer<UserCubit, UserState>(
+        listener: (context, state) {
+          if (state is UserLogoutSuccess) {
+            Get.snackbar('Logout', 'Logout Successful',
+                backgroundColor: Colors.white, colorText: Colors.black);
+            LocalStorageService.removeData(key: 'login');
+            Get.offAll(LoginScreen());
+          }
+        },
+        builder: (context, state) {
+          if (state is UserGetDataSuccess) {
+            return SingleChildScrollView(
+              child: Column(
                 children: [
-                  const CircleAvatar(
-                      radius: 50,
-                      backgroundColor: Colors.white,
-                      backgroundImage: NetworkImage(
-                          'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png')),
-                  const SizedBox(
-                    width: 20.0,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Text(
-                        'Eman',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.bold,
+                  Container(
+                    color: primaryColor,
+                    padding: const EdgeInsets.all(20.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        const CircleAvatar(
+                            radius: 50,
+                            backgroundColor: Colors.white,
+                            backgroundImage: NetworkImage(
+                                'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png')),
+                        const SizedBox(
+                          width: 20.0,
                         ),
-                      ),
-                      Text(
-                        'eman@gmail.com',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 14.0,
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              state.model.name!,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              state.model.email!,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 14.0,
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                    ],
+                        const Spacer(),
+                        InkWell(
+                          onTap: () {
+                            Get.to(EditProfileScreen(
+                              model: state.model,
+                            ));
+                          },
+                          child: CircleAvatar(
+                            radius: 25.0,
+                            backgroundColor: Colors.white.withOpacity(0.2),
+                            child: const Icon(
+                              Icons.edit,
+                              color: Colors.white,
+                              size: 25.0,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                  const Spacer(),
-                  InkWell(
-                    onTap: () {
-                      Get.to(EditProfileScreen());
+                  Container(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: MainCubit.get(context).isDarke
+                            ? Colors.white
+                            : itemsColor,
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      padding: const EdgeInsets.all(12.0),
+                      child: Column(
+                        children: [
+                          buildThings(
+                            onPressed: () {
+                              Get.back();
+                            },
+                            icon: Icons.home_outlined,
+                            text: 'Home'.tr,
+                          ),
+                          customLine(margin: 12.0),
+                          buildThings(
+                            onPressed: () {
+                              MainCubit.get(context).changeMode();
+                            },
+                            icon: MainCubit.get(context).isDarke
+                                ? Icons.light_mode
+                                : Icons.dark_mode,
+                            text: MainCubit.get(context).isDarke
+                                ? 'Light Mode'.tr
+                                : 'Dark Mode'.tr,
+                          ),
+                          customLine(margin: 12.0),
+                          buildThings(
+                            onPressed: () {
+                              showLocalizationBottomSheet(
+                                context,
+                                isSplash: false,
+                              );
+                            },
+                            icon: Icons.language,
+                            text: 'Language'.tr,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      BlocProvider.of<UserCubit>(context).logout();
                     },
-                    child: CircleAvatar(
-                      radius: 25.0,
-                      backgroundColor: Colors.white.withOpacity(0.2),
-                      child: const Icon(
-                        Icons.edit,
-                        color: Colors.white,
-                        size: 25.0,
-                      ),
+                    child: Text(
+                      'LOGOUT'.tr,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 16),
                     ),
                   ),
                 ],
               ),
-            ),
-            Container(
-              padding: const EdgeInsets.all(16.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: MainCubit.get(context).isDarke
-                      ? Colors.white
-                      : itemsColor,
-                  borderRadius: BorderRadius.circular(20.0),
-                ),
-                padding: const EdgeInsets.all(12.0),
-                child: Column(
-                  children: [
-                    buildThings(
-                      onPressed: () {
-                        Get.back();
-                      },
-                      icon: Icons.home_outlined,
-                      text: 'Home'.tr,
-                    ),
-                    customLine(margin: 12.0),
-                    buildThings(
-                      onPressed: () {
-                        MainCubit.get(context).changeMode();
-                      },
-                      icon: MainCubit.get(context).isDarke
-                          ? Icons.light_mode
-                          : Icons.dark_mode,
-                      text: MainCubit.get(context).isDarke
-                          ? 'Light Mode'.tr
-                          : 'Dark Mode'.tr,
-                    ),
-                    customLine(margin: 12.0),
-                    buildThings(
-                      onPressed: () {
-                        showLocalizationBottomSheet(
-                          context,
-                          isSplash: false,
-                        );
-                      },
-                      icon: Icons.language,
-                      text: 'Language'.tr,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            TextButton(
-              onPressed: () {},
-              child: Text(
-                'LOGOUT'.tr,
-                style:
-                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-              ),
-            ),
-          ],
-        ),
+            );
+          }
+          return Container();
+        },
       ),
     );
   }

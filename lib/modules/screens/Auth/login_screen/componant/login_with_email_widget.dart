@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 
 import '../../../../../shared/componants/componants.dart';
 import '../../../../../shared/style/colors.dart';
 import '../../RegisterPage/register_screen.dart';
+import '../cubit/signin_cubit.dart';
 
 class LoginWithEmailWidget extends StatelessWidget {
   final emailController;
@@ -133,7 +135,9 @@ class LoginWithEmailWidget extends StatelessWidget {
                 press: () {
                   formKey.currentState!.save();
                   if (formKey.currentState!.validate()) {
-                    // Get.offAll( ShopLayout());
+                    BlocProvider.of<SigninCubit>(context).signin(
+                        email: emailController.text,
+                        password: passwordController.text);
                   }
                 }),
           ],

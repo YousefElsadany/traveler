@@ -7,9 +7,11 @@ import 'package:traveller/layout/layout_screen.dart';
 import 'package:traveller/shared/style/colors.dart';
 
 import '../../../../shared/componants/componants.dart';
+import '../../../../shared/local_storage_service.dart';
 
 class CountriesScreen extends StatefulWidget {
-  const CountriesScreen({super.key});
+  final userId;
+  const CountriesScreen({super.key, required this.userId});
 
   @override
   State<CountriesScreen> createState() => _CountriesScreenState();
@@ -174,6 +176,8 @@ class _CountriesScreenState extends State<CountriesScreen> {
                               buttomWidth: double.infinity,
                               text: 'Sign Up'.tr,
                               press: () {
+                                LocalStorageService.saveData(
+                                    key: 'login', value: widget.userId);
                                 Get.offAll(LayoutScreen());
                               }),
                         ],

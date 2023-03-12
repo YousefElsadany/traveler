@@ -1,8 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:traveller/model/places_model.dart';
 import 'package:traveller/modules/screens/user_profile_screen/user_profile_screen.dart';
 import 'package:traveller/modules/screens/layout_screens/home_screen/most_popular.dart';
+import 'package:traveller/shared/local_storage_service.dart';
 import 'package:traveller/shared/main_cubit/main_cubit.dart';
 import 'package:traveller/shared/style/colors.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
@@ -35,6 +38,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    log(LocalStorageService.getData(key: 'login').toString());
     return Scaffold(
       body: ListView(
         children: [

@@ -3,7 +3,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:traveller/layout/layout_screen.dart';
 import 'package:traveller/modules/screens/Auth/login_screen/login_screen.dart';
+import 'package:traveller/modules/screens/user_profile_screen/user_cubit/user_cubit.dart';
+import 'package:traveller/shared/DioHelper.dart';
 import 'package:traveller/shared/local_storage_service.dart';
 import 'package:traveller/shared/main_cubit/main_cubit.dart';
 import 'package:traveller/shared/style/Themes.dart';
@@ -13,16 +16,22 @@ import 'shared/localization/localization_service.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  await DioHelper.init();
   await LocalStorageService.init();
   late bool? isDark = LocalStorageService.getData(key: 'isDark');
+
   Future.delayed(Duration(seconds: 2));
-  runApp(MyApp(isDark: (isDark != null) ? isDark : false));
+  runApp(MyApp(
+    isDark: (isDark != null) ? isDark : false,
+  ));
 }
 
 class MyApp extends StatelessWidget {
   final bool isDark;
-  const MyApp({super.key, required this.isDark});
+  const MyApp({
+    super.key,
+    required this.isDark,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +39,9 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => MainCubit()..changeMode(fromShared: isDark),
+        ),
+        BlocProvider(
+          create: (context) => UserCubit(),
         ),
       ],
       child: BlocBuilder<MainCubit, MainState>(
@@ -73,6 +85,7 @@ class _splashScreenState extends State<splashScreen> {
             builder: (context) => LoginScreen(),
           ),
         );
+
         showLocalizationBottomSheet(
           context,
           isSplash: true,
