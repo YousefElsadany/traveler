@@ -115,4 +115,5 @@ const Map<String, String> arEG = {
   'Logout Successful': "تم تسجيل الخروج بنجاح",
   'Password reset OTP sent to your email':
       "إعادة تعيين كلمة المرور OTP المرسلة إلى بريدك الإلكتروني",
+  'Signup Successful': 'تم انشاء الحساب بنجاح',
 };

@@ -112,4 +112,5 @@ const Map<String, String> enUS = {
   'Logout Successful': 'Logout Successful',
   'Password reset OTP sent to your email':
       'Password reset OTP sent to your email',
+  'Signup Successful': 'Signup Successful',
 };
