@@ -107,4 +107,6 @@ const Map<String, String> arEG = {
   'Change Password': "تغيير كلمة المرور",
   'Change Password Successful': "تم تغيير كلمة المرور بنجاح",
   'Reset Password': "إعادة تعيين كلمة المرور",
+  'Edit': 'تعديل',
+  'Edit Successful': "تم التعديل بنجاح",
 };

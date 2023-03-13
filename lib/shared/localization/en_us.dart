@@ -103,4 +103,6 @@ const Map<String, String> enUS = {
   'Change Password': 'Change Password',
   'Change Password Successful': 'Change Password Successful',
   'Reset Password': 'Reset Password',
+  'Edit': 'Edit',
+  'Edit Successful': 'Edit Successful',
 };

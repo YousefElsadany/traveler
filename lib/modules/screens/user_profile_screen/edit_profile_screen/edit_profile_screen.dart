@@ -99,7 +99,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           value: genderValue);
                     }
                     Get.back();
-                    Get.snackbar('Edit', 'Edit Successful',
+                    Get.snackbar('Edit'.tr, 'Edit Successful'.tr,
                         backgroundColor: Colors.white, colorText: Colors.black);
                   },
                   child: Text(
