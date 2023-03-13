@@ -48,7 +48,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     return BlocConsumer<UserCubit, UserState>(
       listener: (context, state) {
         if (state is UserEditError) {
-          Get.snackbar('Wrong'.tr, 'Something went wrong'.tr);
+          Get.snackbar('Wrong'.tr, 'Something went wrong'.tr,
+              backgroundColor:
+                  !MainCubit.get(context).isDarke ? Colors.black : Colors.white,
+              colorText:
+                  MainCubit.get(context).isDarke ? Colors.black : Colors.white);
         }
       },
       builder: (context, state) {
@@ -100,7 +104,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     }
                     Get.back();
                     Get.snackbar('Edit'.tr, 'Edit Successful'.tr,
-                        backgroundColor: Colors.white, colorText: Colors.black);
+                        backgroundColor: !MainCubit.get(context).isDarke
+                            ? Colors.black
+                            : Colors.white,
+                        colorText: MainCubit.get(context).isDarke
+                            ? Colors.black
+                            : Colors.white);
                   },
                   child: Text(
                     'SAVE'.tr,

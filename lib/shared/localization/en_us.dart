@@ -105,4 +105,11 @@ const Map<String, String> enUS = {
   'Reset Password': 'Reset Password',
   'Edit': 'Edit',
   'Edit Successful': 'Edit Successful',
+
+  'Login Successful': 'Login Successful',
+  'Reset Password Successful': 'Reset Password Successful',
+  'Logout': 'Logout',
+  'Logout Successful': 'Logout Successful',
+  'Password reset OTP sent to your email':
+      'Password reset OTP sent to your email',
 };

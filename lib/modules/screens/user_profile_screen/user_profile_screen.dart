@@ -46,8 +46,13 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
       body: BlocConsumer<UserCubit, UserState>(
         listener: (context, state) {
           if (state is UserLogoutSuccess) {
-            Get.snackbar('Logout', 'Logout Successful',
-                backgroundColor: Colors.white, colorText: Colors.black);
+            Get.snackbar('Logout'.tr, 'Logout Successful'.tr,
+                backgroundColor: !MainCubit.get(context).isDarke
+                    ? Colors.black
+                    : Colors.white,
+                colorText: MainCubit.get(context).isDarke
+                    ? Colors.black
+                    : Colors.white);
             LocalStorageService.removeData(key: 'login');
             LocalStorageService.removeData(key: 'userId');
             Get.offAll(LoginScreen());

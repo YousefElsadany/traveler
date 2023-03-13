@@ -12,6 +12,7 @@ import 'package:traveller/shared/local_storage_service.dart';
 import 'package:traveller/shared/style/colors.dart';
 
 import '../../../../shared/componants/componants.dart';
+import '../../../../shared/main_cubit/main_cubit.dart';
 import 'componant/login_with_email_widget.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -50,11 +51,25 @@ class _LoginScreenState extends State<LoginScreen> {
                   key: 'userId', value: state.model.data!.sId);
               LocalStorageService.putBool(key: 'isloged', value: true);
 
-              Get.snackbar('Login', state.model.message!,
-                  backgroundColor: Colors.white, colorText: Colors.black);
+              Get.snackbar(
+                'Login'.tr,
+                'Login Successful'.tr,
+                backgroundColor: !MainCubit.get(context).isDarke
+                    ? Colors.black
+                    : Colors.white,
+                colorText: MainCubit.get(context).isDarke
+                    ? Colors.black
+                    : Colors.white,
+              );
             }
             if (state is SigninError) {
-              Get.snackbar('Wrong'.tr, 'Something went wrong'.tr);
+              Get.snackbar('Wrong'.tr, 'Something went wrong'.tr,
+                  backgroundColor: !MainCubit.get(context).isDarke
+                      ? Colors.black
+                      : Colors.white,
+                  colorText: MainCubit.get(context).isDarke
+                      ? Colors.black
+                      : Colors.white);
             }
           },
           builder: (context, state) {

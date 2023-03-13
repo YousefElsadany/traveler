@@ -40,10 +40,22 @@ class _CHangePasswordScreenState extends State<CHangePasswordScreen> {
         listener: (context, state) {
           if (state is UserChangePasswordSuccess) {
             Get.back();
-            Get.snackbar('Change Password'.tr, state.message);
+            Get.snackbar('Change Password'.tr, 'Change Password Successful'.tr,
+                backgroundColor: !MainCubit.get(context).isDarke
+                    ? Colors.black
+                    : Colors.white,
+                colorText: MainCubit.get(context).isDarke
+                    ? Colors.black
+                    : Colors.white);
           }
           if (state is UserChangePasswordError) {
-            Get.snackbar('Wrong'.tr, 'Something went wrong'.tr);
+            Get.snackbar('Wrong'.tr, 'Something went wrong'.tr,
+                backgroundColor: !MainCubit.get(context).isDarke
+                    ? Colors.black
+                    : Colors.white,
+                colorText: MainCubit.get(context).isDarke
+                    ? Colors.black
+                    : Colors.white);
           }
         },
         child: ResetAndChangePassword(

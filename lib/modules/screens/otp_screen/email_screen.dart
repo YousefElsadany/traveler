@@ -41,7 +41,13 @@ class EmailScreen extends StatelessWidget {
             ));
           }
           if (state is SendResetPassError) {
-            Get.snackbar('Wrong'.tr, 'Something went wrong'.tr);
+            Get.snackbar('Wrong'.tr, 'Something went wrong'.tr,
+                backgroundColor: !MainCubit.get(context).isDarke
+                    ? Colors.black
+                    : Colors.white,
+                colorText: MainCubit.get(context).isDarke
+                    ? Colors.black
+                    : Colors.white);
           }
         },
         builder: (context, state) {

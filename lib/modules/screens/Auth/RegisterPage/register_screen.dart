@@ -55,12 +55,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
               Get.to(CountriesScreen(
                 userId: state.model.data!.sId,
               ));
-
-              Get.snackbar('Signup'.tr, state.model.message!,
-                  backgroundColor: Colors.white, colorText: Colors.black);
+              Get.snackbar('Signup'.tr, 'Signup Successful'.tr,
+                  backgroundColor: !MainCubit.get(context).isDarke
+                      ? Colors.black
+                      : Colors.white,
+                  colorText: MainCubit.get(context).isDarke
+                      ? Colors.black
+                      : Colors.white);
             }
             if (state is SignupError) {
-              Get.snackbar('Wrong'.tr, 'Something went wrong'.tr);
+              Get.snackbar('Wrong'.tr, 'Something went wrong'.tr,
+                  backgroundColor: !MainCubit.get(context).isDarke
+                      ? Colors.black
+                      : Colors.white,
+                  colorText: MainCubit.get(context).isDarke
+                      ? Colors.black
+                      : Colors.white);
             }
           },
           builder: (context, state) {

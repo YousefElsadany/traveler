@@ -41,10 +41,22 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
         listener: (context, state) {
           if (state is SendResetPassRequestLoaded) {
             Get.offAll(LoginScreen());
-            Get.snackbar('Reset Password'.tr, state.message);
+            Get.snackbar('Reset Password'.tr, 'Reset Password Successful'.tr,
+                backgroundColor: !MainCubit.get(context).isDarke
+                    ? Colors.black
+                    : Colors.white,
+                colorText: MainCubit.get(context).isDarke
+                    ? Colors.black
+                    : Colors.white);
           }
           if (state is SendResetPassRequestError) {
-            Get.snackbar('Wrong'.tr, 'Something went wrong'.tr);
+            Get.snackbar('Wrong'.tr, 'Something went wrong'.tr,
+                backgroundColor: !MainCubit.get(context).isDarke
+                    ? Colors.black
+                    : Colors.white,
+                colorText: MainCubit.get(context).isDarke
+                    ? Colors.black
+                    : Colors.white);
           }
         },
         child: ResetAndChangePassword(

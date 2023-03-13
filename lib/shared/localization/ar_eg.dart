@@ -109,4 +109,10 @@ const Map<String, String> arEG = {
   'Reset Password': "إعادة تعيين كلمة المرور",
   'Edit': 'تعديل',
   'Edit Successful': "تم التعديل بنجاح",
+  'Login Successful': "تم تسجيل الدخول بنجاح",
+  'Reset Password Successful': "تم إعادة تعيين كلمة المرور بنجاح",
+  'Logout': "تسجيل الخروج",
+  'Logout Successful': "تم تسجيل الخروج بنجاح",
+  'Password reset OTP sent to your email':
+      "إعادة تعيين كلمة المرور OTP المرسلة إلى بريدك الإلكتروني",
 };

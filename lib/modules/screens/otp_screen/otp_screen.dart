@@ -46,7 +46,7 @@ class OtpScreen extends StatelessWidget {
                 const SizedBox(height: 30),
                 RichText(
                   text: TextSpan(
-                    text: message,
+                    text: 'Password reset OTP sent to your email'.tr,
                     style: Theme.of(context).textTheme.bodyText1!,
                     children: <TextSpan>[
                       TextSpan(
