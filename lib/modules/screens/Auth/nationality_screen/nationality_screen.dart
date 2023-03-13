@@ -9,6 +9,7 @@ import 'package:traveller/shared/style/colors.dart';
 
 import '../../../../shared/componants/componants.dart';
 import '../../../../shared/local_storage_service.dart';
+import '../../../../shared/main_cubit/main_cubit.dart';
 
 class CountriesScreen extends StatefulWidget {
   final userId;
@@ -61,8 +62,11 @@ class _CountriesScreenState extends State<CountriesScreen> {
               children: <Widget>[
                 Container(
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Colors.white),
+                    borderRadius: BorderRadius.circular(15),
+                    color: MainCubit.get(context).isDarke
+                        ? Colors.white
+                        : itemsColor,
+                  ),
                   child: Container(
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
@@ -121,6 +125,10 @@ class _CountriesScreenState extends State<CountriesScreen> {
                                       ),
                                     ),
                                     DropdownButton(
+                                      dropdownColor:
+                                          !MainCubit.get(context).isDarke
+                                              ? Colors.black
+                                              : Colors.white,
                                       value: itemValue,
                                       borderRadius: BorderRadius.circular(15),
                                       isExpanded: true,
@@ -153,6 +161,9 @@ class _CountriesScreenState extends State<CountriesScreen> {
                             ),
                           ),
                           DropdownButton(
+                            dropdownColor: !MainCubit.get(context).isDarke
+                                ? Colors.black
+                                : Colors.white,
                             value: tourismValue,
                             isExpanded: true,
                             borderRadius: BorderRadius.circular(15),

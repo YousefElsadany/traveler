@@ -89,7 +89,7 @@ Widget customTextFeild(
         ),
       ),
     );
-var genderItems = ['female', 'male', 'I don\'t want to tell'.tr];
+var genderItems = ['female', 'male'];
 DropdownMenuItem<String> buildMenuItem(context, String item) {
   return DropdownMenuItem(
     value: item,

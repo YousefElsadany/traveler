@@ -206,10 +206,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       DropdownButton(
                                         value: genderValue,
                                         isExpanded: true,
-                                        underline: Divider(
+                                        dropdownColor:
+                                            !MainCubit.get(context).isDarke
+                                                ? Colors.black
+                                                : Colors.white,
+                                        underline: const Divider(
                                           color: Colors.black,
                                         ),
-                                        icon: Icon(Icons.keyboard_arrow_down),
+                                        icon: const Icon(
+                                            Icons.keyboard_arrow_down),
                                         items: genderItems.map((String items) {
                                           return buildMenuItem(context, items);
                                         }).toList(),
