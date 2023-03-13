@@ -9,6 +9,7 @@ import 'package:traveller/modules/screens/Auth/nationality_screen/nationality_sc
 import 'package:traveller/shared/style/colors.dart';
 
 import '../../../../shared/componants/componants.dart';
+import '../../../../shared/main_cubit/main_cubit.dart';
 import 'cubit/signup_cubit.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -38,7 +39,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         ),
         leading: IconButton(
           icon: Icon(
-            Icons.arrow_back_ios_new_outlined,
+            Icons.arrow_back_ios,
             color: Colors.white,
           ),
           onPressed: () => Navigator.of(context).pop(),
@@ -55,7 +56,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 userId: state.model.data!.sId,
               ));
 
-              Get.snackbar('Signup', state.model.message!,
+              Get.snackbar('Signup'.tr, state.model.message!,
                   backgroundColor: Colors.white, colorText: Colors.black);
             }
             if (state is SignupError) {
@@ -81,8 +82,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       children: <Widget>[
                         Container(
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              color: Colors.white),
+                            borderRadius: BorderRadius.circular(15),
+                            color: MainCubit.get(context).isDarke
+                                ? Colors.white
+                                : itemsColor,
+                          ),
                           child: Container(
                             child: Padding(
                               padding: EdgeInsets.all(16.0),
@@ -99,6 +103,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                           Text(
                                             'Sign Up'.tr,
                                             style: TextStyle(
+                                              color: Color(0xff929292),
                                               fontWeight: FontWeight.bold,
                                               fontSize: 30.0,
                                             ),
@@ -111,6 +116,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       Text(
                                         'Name'.tr,
                                         style: TextStyle(
+                                          color: Color(0xff929292),
                                           fontSize: 14.0,
                                           // color: Color(0xff929292),
                                         ),
@@ -133,6 +139,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       Text(
                                         'Email'.tr,
                                         style: TextStyle(
+                                          color: Color(0xff929292),
                                           fontSize: 14.0,
                                           // color:  Color(0xff929292),
                                         ),
@@ -154,9 +161,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       ),
                                       TextField(
                                         controller: birthdateController,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyText1!
+                                            .copyWith(fontSize: 14),
                                         decoration: InputDecoration(
                                             icon: Icon(Icons.calendar_today),
-                                            labelText: 'Birthdate'.tr),
+                                            labelText: 'Birthdate'.tr,
+                                            labelStyle: TextStyle(
+                                                color: Colors.grey[500])),
                                         readOnly: true,
                                         onTap: () async {
                                           DateTime? pickedDate =
@@ -185,6 +198,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       Text(
                                         'Gender'.tr,
                                         style: TextStyle(
+                                          color: Color(0xff929292),
                                           fontSize: 14.0,
                                           // color: Color(0xff929292),
                                         ),
@@ -211,6 +225,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       Text(
                                         'Password'.tr,
                                         style: TextStyle(
+                                          color: Color(0xff929292),
                                           fontSize: 14.0,
                                           // color: Color(0xff929292),
                                         ),

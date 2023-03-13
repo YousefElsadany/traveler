@@ -25,7 +25,7 @@ class EmailScreen extends StatelessWidget {
               Navigator.pop(context);
             },
             icon: const Icon(
-              Icons.arrow_back_ios_new,
+              Icons.arrow_back_ios,
             )),
         iconTheme: IconTheme.of(context).copyWith(
             color:
@@ -54,7 +54,7 @@ class EmailScreen extends StatelessWidget {
                   children: [
                     const SizedBox(height: 30),
                     Text(
-                      'Enter Email Address'.tr,
+                      'Enter your email address'.tr,
                       style: Theme.of(context).textTheme.bodyText1!,
                     ),
                     const SizedBox(height: 30),
@@ -62,7 +62,7 @@ class EmailScreen extends StatelessWidget {
                       context,
                       controller: emailController,
                       inputType: TextInputType.emailAddress,
-                      title: 'email'.tr,
+                      title: 'Email'.tr,
                     ),
                     const SizedBox(height: 50),
                     state is SendResetPassLoading

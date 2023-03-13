@@ -92,9 +92,9 @@ class _ResetAndChangePasswordState extends State<ResetAndChangePassword> {
                           },
                           validate: (value) {
                             if (value!.isEmpty) {
-                              return 'Old password is requird';
+                              return 'Old password is requird'.tr;
                             } else if (value.length < 6) {
-                              return 'Old password less than 6 chars';
+                              return 'Old password less than 6 chars'.tr;
                             }
                             return null;
                           },
@@ -127,9 +127,9 @@ class _ResetAndChangePasswordState extends State<ResetAndChangePassword> {
                 },
                 validate: (value) {
                   if (value!.isEmpty) {
-                    return 'New password is requird';
+                    return 'New password is requird'.tr;
                   } else if (value.length < 6) {
-                    return 'New password less than 6 chars';
+                    return 'New password less than 6 chars'.tr;
                   }
                   return null;
                 },
@@ -160,9 +160,9 @@ class _ResetAndChangePasswordState extends State<ResetAndChangePassword> {
                 },
                 validate: (value) {
                   if (value!.isEmpty) {
-                    return 'Re-new password is requird';
+                    return 'Re-new password is requird'.tr;
                   } else if (value != widget.newPasswordController.text) {
-                    return 'Passwords is not match';
+                    return 'Passwords is not match'.tr;
                   }
                   return null;
                 },

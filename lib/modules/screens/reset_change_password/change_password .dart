@@ -40,10 +40,10 @@ class _CHangePasswordScreenState extends State<CHangePasswordScreen> {
         listener: (context, state) {
           if (state is UserChangePasswordSuccess) {
             Get.back();
-            Get.snackbar('Change Password', 'Change Password Successful');
+            Get.snackbar('Change Password'.tr, state.message);
           }
           if (state is UserChangePasswordError) {
-            Get.snackbar('Wrong', 'Something went wrong');
+            Get.snackbar('Wrong'.tr, 'Something went wrong'.tr);
           }
         },
         child: ResetAndChangePassword(
@@ -59,7 +59,7 @@ class _CHangePasswordScreenState extends State<CHangePasswordScreen> {
                   newPassword: newPasswordController.text);
             } else {}
           },
-          title: 'Change Password',
+          title: 'Change Password'.tr,
         ),
       ),
     );
