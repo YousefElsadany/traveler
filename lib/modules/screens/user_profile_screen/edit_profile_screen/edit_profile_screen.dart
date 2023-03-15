@@ -71,8 +71,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             ),
             backgroundColor: primaryColor,
             leading: IconButton(
-              icon: const Icon(Icons.arrow_back_ios_new_outlined,
-                  color: Colors.white),
+              icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
               onPressed: () => Navigator.of(context).pop(),
             ),
             actions: [
@@ -222,9 +221,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         ),
                         Text(
                           'Gender'.tr,
-                          style: TextStyle(
-                            color: Colors.grey[600],
-                          ),
+                          style:
+                              Theme.of(context).textTheme.bodyText1!.copyWith(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                  ),
                         ),
                         const SizedBox(
                           height: 15.0,
@@ -273,9 +274,10 @@ Widget buildEditFeild(
       children: [
         Text(
           text,
-          style: TextStyle(
-            color: Colors.grey[600],
-          ),
+          style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+              ),
         ),
         const SizedBox(
           height: 10.0,

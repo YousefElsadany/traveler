@@ -73,13 +73,10 @@ class LoginWithEmailWidget extends StatelessWidget {
                 SizedBox(
                   height: 38.0,
                 ),
-                Text(
-                  'Email'.tr,
-                  style: TextStyle(
-                    fontSize: 14.0,
-                    color: Color(0xff929292),
-                  ),
-                ),
+                Text('Email'.tr,
+                    style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                          fontSize: 14.0,
+                        )),
                 customTextFeild(
                   context,
                   controller: emailController,
@@ -95,13 +92,10 @@ class LoginWithEmailWidget extends StatelessWidget {
                 SizedBox(
                   height: 38.0,
                 ),
-                Text(
-                  'Password'.tr,
-                  style: TextStyle(
-                    fontSize: 14.0,
-                    color: Color(0xff929292),
-                  ),
-                ),
+                Text('Password'.tr,
+                    style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                          fontSize: 14.0,
+                        )),
                 customTextFeild(
                   context,
                   controller: passwordController,

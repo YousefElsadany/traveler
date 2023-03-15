@@ -110,27 +110,25 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Text(
-                                            'Sign Up'.tr,
-                                            style: TextStyle(
-                                              color: Color(0xff929292),
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 30.0,
-                                            ),
-                                          ),
+                                          Text('Sign Up'.tr,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyText1!
+                                                  .copyWith(
+                                                    fontSize: 30.0,
+                                                  )),
                                         ],
                                       ),
                                       SizedBox(
                                         height: 30.0,
                                       ),
-                                      Text(
-                                        'Name'.tr,
-                                        style: TextStyle(
-                                          color: Color(0xff929292),
-                                          fontSize: 14.0,
-                                          // color: Color(0xff929292),
-                                        ),
-                                      ),
+                                      Text('Name'.tr,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyText1!
+                                              .copyWith(
+                                                fontSize: 14.0,
+                                              )),
                                       customTextFeild(
                                         context,
                                         controller: nameController,
@@ -146,14 +144,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       SizedBox(
                                         height: 20.0,
                                       ),
-                                      Text(
-                                        'Email'.tr,
-                                        style: TextStyle(
-                                          color: Color(0xff929292),
-                                          fontSize: 14.0,
-                                          // color:  Color(0xff929292),
-                                        ),
-                                      ),
+                                      Text('Email'.tr,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyText1!
+                                              .copyWith(
+                                                fontSize: 14.0,
+                                              )),
                                       customTextFeild(
                                         context,
                                         controller: emailController,
@@ -205,14 +202,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       SizedBox(
                                         height: 20.0,
                                       ),
-                                      Text(
-                                        'Gender'.tr,
-                                        style: TextStyle(
-                                          color: Color(0xff929292),
-                                          fontSize: 14.0,
-                                          // color: Color(0xff929292),
-                                        ),
-                                      ),
+                                      Text('Gender'.tr,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyText1!
+                                              .copyWith(
+                                                fontSize: 14.0,
+                                              )),
                                       DropdownButton(
                                         value: genderValue,
                                         isExpanded: true,
@@ -237,14 +233,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       SizedBox(
                                         height: 20.0,
                                       ),
-                                      Text(
-                                        'Password'.tr,
-                                        style: TextStyle(
-                                          color: Color(0xff929292),
-                                          fontSize: 14.0,
-                                          // color: Color(0xff929292),
-                                        ),
-                                      ),
+                                      Text('Password'.tr,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyText1!
+                                              .copyWith(
+                                                fontSize: 14.0,
+                                              )),
                                       customTextFeild(
                                         context,
                                         controller: passwordController,

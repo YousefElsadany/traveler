@@ -78,7 +78,13 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 const SizedBox(
                   height: 20,
                 ),
-                Text(widget.item.description),
+                Text(
+                  widget.item.description,
+                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                      ),
+                ),
                 const SizedBox(
                   height: 20,
                 ),
@@ -95,7 +101,14 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     ),
                     Row(
                       children: [
-                        Text(widget.item.rating.toString()),
+                        Text(
+                          widget.item.rating.toString(),
+                          style:
+                              Theme.of(context).textTheme.bodyText1!.copyWith(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                        ),
                         const Icon(Icons.star, size: 12, color: Colors.amber),
                         const Icon(Icons.star, size: 12, color: Colors.amber),
                         const Icon(Icons.star, size: 12, color: Colors.amber),
